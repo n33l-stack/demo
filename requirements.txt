@@ -1,0 +1,12 @@
+streamlit>=1.42.0
+python-dotenv>=1.0.0
+langchain-nomic>=0.0.3
+langchain-groq>=0.0.5
+langchain-community>=0.0.19
+langchain-core>=0.1.22
+pinecone-client>=3.0.0
+pinecone-text>=0.7.1
+langgraph>=0.0.20
+typing-extensions>=4.9.0
+uuid>=1.30
+asyncio>=3.4.3 
