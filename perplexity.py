@@ -173,8 +173,17 @@ async def rag_function(state):
             # For identity questions, we don't need to query the knowledge base
             context = ""
         else:
-            # Get relevant documents for non-identity questions
-            docs = await retriever.ainvoke(query)
+            try:
+                docs = await retriever.ainvoke(query)
+            except Exception as e:
+                if "Sparse vector must contain at least one value" in str(e):
+                    return {
+                        "messages": messages + [
+                            AIMessage(content="Your question did not contain enough meaningful words for search. Please rephrase and try again.")
+                        ]
+                    }
+                else:
+                    raise
             context = "\n".join(doc.page_content for doc in docs)
         
         # Optimize chat history to include only recent relevant messages
