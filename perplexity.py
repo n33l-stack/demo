@@ -155,7 +155,7 @@ async def rag_function(state):
             }
         
         # Optionally: Check if BM25 encoder returns a non-empty sparse vector
-        bm25_encoder = get_bm25_encoder()
+        """bm25_encoder = get_bm25_encoder()
         sparse_vec_list = bm25_encoder.transform([query])
         sparse_vec = sparse_vec_list[0] if sparse_vec_list else {}
         if not sparse_vec or not any(sparse_vec.values()):
@@ -163,7 +163,7 @@ async def rag_function(state):
                 "messages": messages + [
                     AIMessage(content="Your question did not contain enough meaningful words for search. Please rephrase and try again.")
                 ]
-            }
+            }"""
 
         # Check if it's an identity question
         identity_questions = [
