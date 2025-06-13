@@ -146,8 +146,24 @@ async def rag_function(state):
             return {"messages": messages + [AIMessage(content="Error: Could not initialize components")]}
         
         # Get the latest message
-        query = messages[-1].content
+        query = messages[-1].content.strip()
+        if not query:
+            return {
+                "messages": messages + [
+                    AIMessage(content="Please enter a valid question.")
+                ]
+            }
         
+        # Optionally: Check if BM25 encoder returns a non-empty sparse vector
+        bm25_encoder = get_bm25_encoder()
+        sparse_vec = bm25_encoder.encode(query)
+        if not sparse_vec or not any(sparse_vec.values()):
+            return {
+                "messages": messages + [
+                    AIMessage(content="Your question did not contain enough meaningful words for search. Please rephrase and try again.")
+                ]
+            }
+
         # Check if it's an identity question
         identity_questions = [
             "what is your name",
