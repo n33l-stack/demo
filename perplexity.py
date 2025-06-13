@@ -156,7 +156,8 @@ async def rag_function(state):
         
         # Optionally: Check if BM25 encoder returns a non-empty sparse vector
         bm25_encoder = get_bm25_encoder()
-        sparse_vec = bm25_encoder.encode(query)
+        sparse_vec_list = bm25_encoder.transform([query])
+        sparse_vec = sparse_vec_list[0] if sparse_vec_list else {}
         if not sparse_vec or not any(sparse_vec.values()):
             return {
                 "messages": messages + [
