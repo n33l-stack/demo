@@ -38,7 +38,7 @@ if "selected_model" not in st.session_state:
 
 # Model configurations
 MODEL_CONFIGS = {
-    "Sophie": "llama-4-maverick-17b-128e-instruct",
+    "Sophie": "meta-llama/llama-4-maverick-17b-128e-instruct",
     "Nolan": "deepseek-r1-distill-llama-70b",
     "Daniel": "gemma2-9b-it",
     "Saba": "mistral-saba-24b"
