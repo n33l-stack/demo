@@ -93,12 +93,7 @@ async def initialize_components():
         )
         
         # Initialize LLM
-        llm = ChatGroq(
-            api_key=os.getenv("GROQ_API_KEY"),
-            model_name="llama-3.3-70b-specdec",
-            temperature=0.5,
-            max_tokens=2048
-        )
+        llm = get_llm()
         
         return retriever, llm
     except Exception as e:
@@ -245,7 +240,7 @@ def render_sidebar():
             "Select Model",
             options=list(MODEL_CONFIGS.keys()),
             index=list(MODEL_CONFIGS.keys()).index(st.session_state.selected_model),
-            key="model_selector"
+            key="selected_model"  # <-- changed from "model_selector"
         )
         
         # Update selected model if changed
